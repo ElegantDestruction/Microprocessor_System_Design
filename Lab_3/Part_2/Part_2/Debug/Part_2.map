@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\Part_2\Part_2\main.asm Wed Feb 13 16:09:30 2019
+AVRASM ver. 2.2.7  C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\Part_2\Part_2\main.asm Thu Feb 14 11:28:35 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -477,19 +477,19 @@ DEF  check        r24
 DEF  xtime        r25
 CSEG start        00000001
 CSEG main         00000008
-CSEG get_key      00000028
-CSEG f1           00000038
+CSEG get_key      00000026
+CSEG f1           00000036
 CSEG scan         0000000c
 CSEG not_ready    00000011
 CSEG scan_loop    00000014
 CSEG scan_next_row 00000017
-CSEG next_key     00000022
-CSEG sdelay       00000044
-CSEG gotkey       00000027
-CSEG key_code     00000055
-CSEG check_next   0000002c
-CSEG found        00000036
-CSEG one_sec_delay 0000004b
-CSEG f2           00000041
-CSEG idelay       00000046
-CSEG delay        0000004e
+CSEG next_key     00000021
+CSEG sdelay       00000042
+CSEG gotkey       00000025
+CSEG key_code     00000053
+CSEG check_next   0000002a
+CSEG found        00000034
+CSEG one_sec_delay 00000049
+CSEG f2           0000003f
+CSEG idelay       00000044
+CSEG delay        0000004c

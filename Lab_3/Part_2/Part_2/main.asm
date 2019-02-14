@@ -62,9 +62,9 @@ scan:
 
 not_ready:
 	
-	in temp, PIND
-	eor temp, check
-	brne not_ready
+	in temp, PIND			; poll the status of PORTD pins and detect if any key is pressed
+	eor temp, check			; use xor to determine which key is pressed
+	brne not_ready			; exit loop (not_ready) if the values in the temp and check are NOT equal
 
 ; The scan_loop routine is to load two variables (temp & xtime) for scan keypad scan
 scan_loop:
@@ -76,25 +76,25 @@ scan_loop:
 
 scan_next_row:
 	
-	ror temp			
-	mov check, temp
-	out PORTD, temp
-	in key, PIND
-	cp key, temp
-	breq next_key
-	rcall sdelay
-	in key, PIND
-	eor temp, key
-	brne gotkey
-	ret
+	ror temp				; rotate to the right for the temp register
+	mov check, temp			; move the temp register to check
+	out PORTD, temp			; output temp to PORTD
+	in key, PIND			; input PIND to key
+	eor key, temp			; compare the values in the temp register and the key register
+	breq next_key			; when equal, branch to the next_key function
+	rcall sdelay			; call the delay function sdelay for keypad
+	in key, PIND			; input PIND to ky
+	eor temp, key			; xor temp with key
+	brne gotkey				; branch to gotkey if a pressed, exit if the values in temp and check 
+						;	are NOT equal (brne)
 
 
 next_key:
 
 	mov temp, check			; move check register to temp register
 	dec xtime				; decrement xtime by 1 (xtime-1)
-	cp temp, xtime			; compare temp and xtime
-	breq scan_next_row		; if temp is not zero, jump to scan_next_row
+							; compare temp and xtime
+	brne scan_next_row		; if temp is not zero, jump to scan_next_row 
 	rjmp scan_loop			; otherwise jump to scan_loop routine
 
 gotkey:
@@ -121,7 +121,7 @@ check_next:
 	adiw	ZH:ZL,1					; increment the Z register pointer to the next position
 	inc		xtime					; increment the xtime by 1
 	cpi		xtime, 0x10				; compare (cpi) with 0x10
-	brne	check_next				; branch to check_next routine if xtime is note equal to zero
+	brne	check_next				; branch to check_next routine if xtime is not equal to zero
 	ldi		key,0x20				; load 0x20 to key if temp is equal to zero
 	ret								; return to the main routine
 
@@ -152,7 +152,7 @@ f2:
 
 ;**** Time delay for a keypad between each press **************************
 sdelay:
-	ldi		r22, 64
+	ldi		r21, 64
 	ldi		r22, 255
 
 idelay:
@@ -170,14 +170,13 @@ one_sec_delay:
 	ldi		r21, 255
 	ldi		r22, 255
 
-delay:
-	dec		r22
-	brne	delay
-	dec		r21
-	brne	delay
-	dec		r20
-	brne	delay
-	ret
+delay:	dec		r22
+		brne	delay
+		dec		r21
+		brne	delay
+		dec		r20
+		brne	delay
+		ret
 
 
 ;**********key_code for each key on the 4x4 keypad **********************************
@@ -186,4 +185,4 @@ key_code:
 	.db		0xE7, 0xEE, 0xDE, 0xBE, 0xED, 0xDD, 0xBD, 0xEB
 	.db		0xDB, 0xBB, 0x7E, 0x7D, 0x7B, 0x77, 0xB7, 0xD7
 
-; the end of the program
+; END

@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\Part_2\Part_2\main.asm Wed Feb 13 16:09:30 2019
+AVRASM ver. 2.2.7  C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\Part_2\Part_2\main.asm Thu Feb 14 11:28:35 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m8515def.inc'
 C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\Part_2\Part_2\main.asm(23): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\M8515DEF.INC'
@@ -779,9 +779,9 @@ C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\P
                                  
                                  
                                  main:
-000008 d01f                      	rcall	get_key		;the get_key function call is to get the pressed keys from a 4x4 keypad
+000008 d01d                      	rcall	get_key		;the get_key function call is to get the pressed keys from a 4x4 keypad
 000009 2f91                      	mov		xtime, key	;store the pressed key r17 to register r25
-00000a d02d                      	rcall	f1			;function call to flash LEDs xtime on the PORTB connected to LEDs
+00000a d02b                      	rcall	f1			;function call to flash LEDs xtime on the PORTB connected to LEDs
 00000b cffc                      	rjmp	main		;jump back to the main routine
                                  
                                  
@@ -797,9 +797,9 @@ C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\P
                                  
                                  not_ready:
                                  	
-000011 b300                      	in temp, PIND
-000012 2708                      	eor temp, check
-000013 f7e9                      	brne not_ready
+000011 b300                      	in temp, PIND			; poll the status of PORTD pins and detect if any key is pressed
+000012 2708                      	eor temp, check			; use xor to determine which key is pressed
+000013 f7e9                      	brne not_ready			; exit loop (not_ready) if the values in the temp and check are NOT equal
                                  
                                  ; The scan_loop routine is to load two variables (temp & xtime) for scan keypad scan
                                  scan_loop:
@@ -811,126 +811,120 @@ C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_3\P
                                  
                                  scan_next_row:
                                  	
-000017 9507                      	ror temp
-000018 2f80                      	mov check, temp
-000019 bb02                      	out PORTD, temp
-00001a b310                      	in key, PIND
-00001b 1710                      	cp key, temp
-00001c f029                      	breq next_key
-00001d d026                      	rcall sdelay
-00001e b310                      	in key, PIND
-00001f 2701                      	eor temp, key
-000020 f431                      	brne gotkey
-000021 9508                      	ret
-                                 
-                                 
-                                 
-                                 
-                                 
+000017 9507                      	ror temp				; rotate to the right for the temp register
+000018 2f80                      	mov check, temp			; move the temp register to check
+000019 bb02                      	out PORTD, temp			; output temp to PORTD
+00001a b310                      	in key, PIND			; input PIND to key
+00001b 2710                      	eor key, temp			; compare the values in the temp register and the key register
+00001c f021                      	breq next_key			; when equal, branch to the next_key function
+00001d d024                      	rcall sdelay			; call the delay function sdelay for keypad
+00001e b310                      	in key, PIND			; input PIND to ky
+00001f 2701                      	eor temp, key			; xor temp with key
+000020 f421                      	brne gotkey				; branch to gotkey if a pressed, exit if the values in temp and check 
+                                 						;	are NOT equal (brne)
                                  
                                  
                                  next_key:
                                  
-000022 2f08                      	mov temp, check			; move check register to temp register
-000023 959a                      	dec xtime				; decrement xtime by 1 (xtime-1)
-000024 1709                      	cp temp, xtime			; compare temp and xtime
-000025 f389                      	breq scan_next_row		; if temp is not zero, jump to scan_next_row
-000026 cfed                      	rjmp scan_loop			; otherwise jump to scan_loop routine
+000021 2f08                      	mov temp, check			; move check register to temp register
+000022 959a                      	dec xtime				; decrement xtime by 1 (xtime-1)
+                                 							; compare temp and xtime
+000023 f799                      	brne scan_next_row		; if temp is not zero, jump to scan_next_row 
+000024 cfef                      	rjmp scan_loop			; otherwise jump to scan_loop routine
                                  
                                  gotkey:
-000027 9508                      	ret			;return to the main routine when a key match occurs
+000025 9508                      	ret			;return to the main routine when a key match occurs
                                  
                                  
                                  get_key:
                                  	
-000028 dfe3                      	rcall	scan						; call the function scan to scan for any pressed keys
-000029 e090                      	ldi		xtime, 0x00					; load 0x00 to xtime register
-00002a eaea                      	ldi		ZL, LOW(2*key_code)			; load the key code to the lower byte of Z register
-00002b e0f0                      	ldi		ZH, HIGH(2*key_code)		; load the key code to the higher byter of Z register
+000026 dfe5                      	rcall	scan						; call the function scan to scan for any pressed keys
+000027 e090                      	ldi		xtime, 0x00					; load 0x00 to xtime register
+000028 eae6                      	ldi		ZL, LOW(2*key_code)			; load the key code to the lower byte of Z register
+000029 e0f0                      	ldi		ZH, HIGH(2*key_code)		; load the key code to the higher byter of Z register
                                  
                                  ;check_next is used to check the key pressed key with the pre-loaded keycodes to identify
                                  ; which key is pressed on the keypad
                                  
                                  check_next:
                                  	
-00002c 95c8                      	lpm								; use the instruction LPM to load the Z register pointer to the address
+00002a 95c8                      	lpm								; use the instruction LPM to load the Z register pointer to the address
                                  									; the key codes stored in memory; use the default register r0
-00002d 2d00                      	mov		temp, r0				; move the r0 to the temp register
-00002e 1701                      	cp		temp, key				; compare (cp) temp with the pressed key
-00002f f031                      	breq	found					; branch to found routine if temp is zero
-000030 9631                      	adiw	ZH:ZL,1					; increment the Z register pointer to the next position
-000031 9593                      	inc		xtime					; increment the xtime by 1
-000032 3190                      	cpi		xtime, 0x10				; compare (cpi) with 0x10
-000033 f7c1                      	brne	check_next				; branch to check_next routine if xtime is note equal to zero
-000034 e210                      	ldi		key,0x20				; load 0x20 to key if temp is equal to zero
-000035 9508                      	ret								; return to the main routine
+00002b 2d00                      	mov		temp, r0				; move the r0 to the temp register
+00002c 1701                      	cp		temp, key				; compare (cp) temp with the pressed key
+00002d f031                      	breq	found					; branch to found routine if temp is zero
+00002e 9631                      	adiw	ZH:ZL,1					; increment the Z register pointer to the next position
+00002f 9593                      	inc		xtime					; increment the xtime by 1
+000030 3190                      	cpi		xtime, 0x10				; compare (cpi) with 0x10
+000031 f7c1                      	brne	check_next				; branch to check_next routine if xtime is not equal to zero
+000032 e210                      	ldi		key,0x20				; load 0x20 to key if temp is equal to zero
+000033 9508                      	ret								; return to the main routine
                                  
                                  found: 
-000036 2f19                      	mov		key, xtime				; if the pressed key is found, move xtime to key register
-000037 9508                      	ret								; return to the main routine
+000034 2f19                      	mov		key, xtime				; if the pressed key is found, move xtime to key register
+000035 9508                      	ret								; return to the main routine
                                  
                                  
                                  ; f1 routine is the routine to flash leds the number of times according to the number in (0-9)
                                  ; and (A-F) key is pressed on a keypad. If the key "A" in hex is pressed, the LEDs flash 10 times
                                  
                                  f1:
-000038 e000                      	ldi		temp, 0x00
-000039 bb08                      	out		PORTB, temp
-00003a d010                      	rcall	one_sec_delay
-00003b ef0f                      	ldi		temp, 0xff
-00003c bb08                      	out		PORTB, temp
-00003d d00d                      	rcall	one_sec_delay
+000036 e000                      	ldi		temp, 0x00
+000037 bb08                      	out		PORTB, temp
+000038 d010                      	rcall	one_sec_delay
+000039 ef0f                      	ldi		temp, 0xff
+00003a bb08                      	out		PORTB, temp
+00003b d00d                      	rcall	one_sec_delay
                                  
-00003e 3090                      	cpi		xtime, 0
-00003f f409                      	brne	f2
-000040 9593                      	inc		xtime
+00003c 3090                      	cpi		xtime, 0
+00003d f409                      	brne	f2
+00003e 9593                      	inc		xtime
                                  
                                  f2:
-000041 959a                      	dec		xtime
-000042 f7a9                      	brne	f1
-000043 9508                      	ret
+00003f 959a                      	dec		xtime
+000040 f7a9                      	brne	f1
+000041 9508                      	ret
                                  
                                  ;**** Time delay for a keypad between each press **************************
                                  sdelay:
-000044 e460                      	ldi		r22, 64
-000045 ef6f                      	ldi		r22, 255
+000042 e450                      	ldi		r21, 64
+000043 ef6f                      	ldi		r22, 255
                                  
                                  idelay:
-000046 956a                      	dec		r22
-000047 f7f1                      	brne	idelay
-000048 955a                      	dec		r21
-000049 f7e1                      	brne	idelay
-00004a 9508                      	ret
+000044 956a                      	dec		r22
+000045 f7f1                      	brne	idelay
+000046 955a                      	dec		r21
+000047 f7e1                      	brne	idelay
+000048 9508                      	ret
                                  
                                  ;*****Time delay for LEDs flash ***************************************
                                  
                                  one_sec_delay:
                                  	
-00004b e042                      	ldi		r20, 2
-00004c ef5f                      	ldi		r21, 255
-00004d ef6f                      	ldi		r22, 255
+000049 e042                      	ldi		r20, 2
+00004a ef5f                      	ldi		r21, 255
+00004b ef6f                      	ldi		r22, 255
                                  
-                                 delay:
-00004e 956a                      	dec		r22
-00004f f7f1                      	brne	delay
-000050 955a                      	dec		r21
-000051 f7e1                      	brne	delay
-000052 954a                      	dec		r20
-000053 f7d1                      	brne	delay
-000054 9508                      	ret
+00004c 956a                      delay:	dec		r22
+00004d f7f1                      		brne	delay
+00004e 955a                      		dec		r21
+00004f f7e1                      		brne	delay
+000050 954a                      		dec		r20
+000051 f7d1                      		brne	delay
+000052 9508                      		ret
                                  
                                  
                                  ;**********key_code for each key on the 4x4 keypad **********************************
                                  key_code:
                                  
-000055 eee7
-000056 bede
-000057 dded
-000058 ebbd                      	.db		0xE7, 0xEE, 0xDE, 0xBE, 0xED, 0xDD, 0xBD, 0xEB
-000059 bbdb
-00005a 7d7e
-00005b 777b
-00005c d7b7                      	.db		0xDB, 0xBB, 0x7E, 0x7D, 0x7B, 0x77, 0xB7, 0xD7
+000053 eee7
+000054 bede
+000055 dded
+000056 ebbd                      	.db		0xE7, 0xEE, 0xDE, 0xBE, 0xED, 0xDD, 0xBD, 0xEB
+000057 bbdb
+000058 7d7e
+000059 777b
+00005a d7b7                      	.db		0xDB, 0xBB, 0x7E, 0x7D, 0x7B, 0x77, 0xB7, 0xD7
                                  
 
 
@@ -951,25 +945,25 @@ counted separately from r26..r31 here.
 "ATmega8515" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   1 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  27 r17:   8 r18:   0 r19:   0 r20:   2 
-r21:   3 r22:   5 r23:   0 r24:   4 r25:  11 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  26 r17:   8 r18:   0 r19:   0 r20:   2 
+r21:   4 r22:   4 r23:   0 r24:   4 r25:  10 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   2 r31:   2 
 Registers used: 10 out of 35 (28.6%)
 
 "ATmega8515" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 breq  :   3 brge  :   0 brhc  :   0 brhs  :   0 
-brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 brne  :  10 
+brcc  :   0 brcs  :   0 breq  :   2 brge  :   0 brhc  :   0 brhs  :   0 
+brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 brne  :  11 
 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 brvs  :   0 
 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   1 clh   :   0 
 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 clv   :   0 
-clz   :   0 com   :   0 cp    :   3 cpc   :   0 cpi   :   2 cpse  :   0 
-dec   :   7 eor   :   2 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 
+clz   :   0 com   :   0 cp    :   1 cpc   :   0 cpi   :   2 cpse  :   0 
+dec   :   7 eor   :   3 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 
 ijmp  :   0 in    :   3 inc   :   2 ld    :   0 ldd   :   0 ldi   :  19 
 lds   :   0 lpm   :   3 lsl   :   0 lsr   :   0 mov   :   5 movw  :   0 
 mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
-ori   :   0 out   :   9 pop   :   0 push  :   0 rcall :   6 ret   :   7 
+ori   :   0 out   :   9 pop   :   0 push  :   0 rcall :   6 ret   :   6 
 reti  :   0 rjmp  :   3 rol   :   0 ror   :   1 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   0 
 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 ser   :   0 
@@ -981,7 +975,7 @@ Instructions used: 18 out of 110 (16.4%)
 "ATmega8515" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000ba    170     16    186    8192   2.3%
+[.cseg] 0x000000 0x0000b6    166     16    182    8192   2.2%
 [.dseg] 0x000060 0x000060      0      0      0     512   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 
