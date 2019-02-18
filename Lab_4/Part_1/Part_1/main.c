@@ -84,7 +84,7 @@ void runForward(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = forward[i];		// send PORTC the hex value from the sequence
 		
@@ -105,7 +105,7 @@ void runBackward(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = backward[i];		// send PORTC the hex value from the sequence
 		

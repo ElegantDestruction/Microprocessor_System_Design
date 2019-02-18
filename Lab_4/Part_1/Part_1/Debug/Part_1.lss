@@ -227,13 +227,13 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = forward[i];		// send PORTC the hex value from the sequence
   c6:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <forward>
   ca:	85 bb       	out	0x15, r24	; 21
-  cc:	2c e2       	ldi	r18, 0x2C	; 44
-  ce:	31 e0       	ldi	r19, 0x01	; 1
+  cc:	20 e2       	ldi	r18, 0x20	; 32
+  ce:	33 e0       	ldi	r19, 0x03	; 3
 		
 		i++;					//increment i and j
   d0:	81 e0       	ldi	r24, 0x01	; 1
@@ -248,7 +248,7 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = forward[i];		// send PORTC the hex value from the sequence
   e2:	fc 01       	movw	r30, r24
@@ -276,7 +276,7 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
   fc:	61 f7       	brne	.-40     	; 0xd6 <runForward+0x1c>
 		// Resets i back to 0 when it reaches the end of the sequence
 		if (i == 8){
@@ -296,13 +296,13 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = backward[i];		// send PORTC the hex value from the sequence
  10c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
  110:	85 bb       	out	0x15, r24	; 21
- 112:	2c e2       	ldi	r18, 0x2C	; 44
- 114:	31 e0       	ldi	r19, 0x01	; 1
+ 112:	20 e2       	ldi	r18, 0x20	; 32
+ 114:	33 e0       	ldi	r19, 0x03	; 3
 		
 		i++;					//increment i and j
  116:	81 e0       	ldi	r24, 0x01	; 1
@@ -317,7 +317,7 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
 		_delay_ms(10);			//delay adjusts the speed of the motor, user defined
 		PORTC = backward[i];		// send PORTC the hex value from the sequence
  128:	fc 01       	movw	r30, r24
@@ -345,7 +345,7 @@ char gotkey(){
 	int j = 0;
 	
 	// motor runs for 300 iterations of the hex sequences
-	while (j < 300){
+	while (j < 800){
  142:	61 f7       	brne	.-40     	; 0x11c <runBackward+0x1c>
 		// Resets i back to 0 when it reaches the end of the sequence
 		if (i == 8){
