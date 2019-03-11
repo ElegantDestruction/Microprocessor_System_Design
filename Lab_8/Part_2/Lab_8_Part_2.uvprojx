@@ -10,7 +10,6 @@
       <TargetName>CMSIS-DAP</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -49,7 +48,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>Lab_8</OutputName>
+          <OutputName>Lab_8_Part_2</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -257,17 +256,17 @@
                 <Size>0x0</Size>
               </XRAM>
               <OCR_RVCT1>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT2>
               <OCR_RVCT3>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT3>
@@ -277,7 +276,7 @@
                 <Size>0x20000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT5>
@@ -382,19 +381,24 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>uv_ADC.c</FileName>
+              <FileName>IR_LEDs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\uv_ADC.c</FilePath>
+              <FilePath>.\IR_LEDs.c</FilePath>
             </File>
             <File>
-              <FileName>gpio_defs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\gpio_defs.h</FilePath>
+              <FileName>LEDs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LEDs.c</FilePath>
             </File>
             <File>
-              <FileName>adc_defs.h</FileName>
+              <FileName>LEDs.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\adc_defs.h</FilePath>
+              <FilePath>.\LEDs.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_defs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_defs.h</FilePath>
             </File>
           </Files>
         </Group>
