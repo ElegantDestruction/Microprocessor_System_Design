@@ -17,26 +17,25 @@ const int Colors[NUM_RANGE_STEPS][3] = {{ 1, 1, 1}, // white
 																	 
 
 void Init_ADC(void) {
-	
 	SIM->SCGC6 |= (1UL << SIM_SCGC6_ADC0_SHIFT); 
-	ADC0->CFG1 = ; // 16 bit precision
+	ADC0->CFG1 =  0x9C; //ADC_CFG1_ADLPC_MASK | ADC_CFG1_ADIV(0) | ADC_CFG1_ADLSMP_MASK | ADC_CFG1_MODE(3) | ADC_CFG1_ADICLK(0);
 	ADC0->SC2 = 0;
 }
 
-//switch on and off IR_LED
+//switch on and off IR_LED   ????????????????
 void Control_IR_LED(unsigned int led_on) {
 	if (led_on) {
-			PTB->PCOR = MASK(IR_LED_POS);
+			PTB->PCOR =  MASK(IR_LED_POS);
 	} else {
-			PTB-> = MASK(IR_LED_POS); 
+			PTB->PSOR = MASK(IR_LED_POS); 
 	}
 }	
 
 //initilize IR_LED by using the PCR register; identify the pin number
 //on the PORTB to connect it to PORTB 
 void Init_IR_LED(void) {
-	PORTB->[IR_LED_POS] &= ~PORT_PCR_MUX_MASK;          
-	PORTB->[IR_LED_POS] |= PORT_PCR_MUX(1);          
+	PORTB->PCR[IR_LED_POS] &= ~PORT_PCR_MUX_MASK;          
+	PORTB->PCR[IR_LED_POS] |= PORT_PCR_MUX(1);          
 	PTB->PDDR |= MASK(IR_LED_POS);
 	
 	// start off with IR LED turned off
@@ -48,8 +47,7 @@ unsigned Measure_IR(void) {
 	
 	ADC0->SC1[0] = IR_PHOTOTRANSISTOR_CHANNEL; // start conversion on channel 0
 	
-	while (!(ADC0->SC1[0] & ADC_SC1_COCO_MASK))
-		;
+	while (!(ADC0->SC1[0] & ADC_SC1_COCO_MASK));
 	res = ADC0->R[0];
 	// complement result since voltage falls with increasing IR level
 	// but we want result to rise with increasing IR level
