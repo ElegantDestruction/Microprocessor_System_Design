@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\KeyPadLEDs.c</Filename>
+          <Filename>C:\Users\Student\Documents\Semester 6 (Spring 2019)\AVR Microcontrollers\Lab_7\KeyPadLEDs.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Lab_7\KeyPadLEDs.c\127</Expression>
         </Bp>
@@ -248,8 +248,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\KeyPadLEDs.c</PathWithFileName>
-      <FilenameWithoutPath>KeyPadLEDs.c</FilenameWithoutPath>
+      <PathWithFileName>.\KeyPadTri_LED.c</PathWithFileName>
+      <FilenameWithoutPath>KeyPadTri_LED.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

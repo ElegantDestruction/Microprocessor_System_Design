@@ -387,9 +387,9 @@
               <FilePath>.\gpio_defs.h</FilePath>
             </File>
             <File>
-              <FileName>KeyPadLEDs.c</FileName>
+              <FileName>KeyPadTri_LED.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\KeyPadLEDs.c</FilePath>
+              <FilePath>.\KeyPadTri_LED.c</FilePath>
             </File>
           </Files>
         </Group>

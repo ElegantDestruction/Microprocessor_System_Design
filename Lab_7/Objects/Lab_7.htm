@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Lab_7.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Lab_7.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Mar 17 14:42:14 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Mar 19 11:58:54 2019
 <BR><P>
 <H3>Maximum Stack Usage =         40 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -391,26 +391,26 @@ Global Symbols
 
 <P><STRONG><a name="[73]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[43]"></a>LED_init</STRONG> (Thumb, 134 bytes, Stack size 0 bytes, keypadleds.o(i.LED_init))
+<P><STRONG><a name="[43]"></a>LED_init</STRONG> (Thumb, 134 bytes, Stack size 0 bytes, keypadtri_led.o(i.LED_init))
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[45]"></a>LED_set</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, keypadleds.o(i.LED_set))
+<P><STRONG><a name="[45]"></a>LED_set</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, keypadtri_led.o(i.LED_set))
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[2b]"></a>SystemInit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, system_mkl25z4.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl25z4.o(.text)
 </UL>
-<P><STRONG><a name="[47]"></a>delayUs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, keypadleds.o(i.delayUs))
+<P><STRONG><a name="[47]"></a>delayUs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, keypadtri_led.o(i.delayUs))
 <BR><BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keypad_getkey
 </UL>
 
-<P><STRONG><a name="[42]"></a>keypad_init</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, keypadleds.o(i.keypad_init))
+<P><STRONG><a name="[42]"></a>keypad_init</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, keypadtri_led.o(i.keypad_init))
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[39]"></a>main</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, keypadleds.o(i.main))
+<P><STRONG><a name="[39]"></a>main</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, keypadtri_led.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = main &rArr; keypad_getkey
 </UL>
 <BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keypad_init
@@ -421,7 +421,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[44]"></a>keypad_getkey</STRONG> (Thumb, 212 bytes, Stack size 40 bytes, keypadleds.o(i.keypad_getkey))
+<P><STRONG><a name="[44]"></a>keypad_getkey</STRONG> (Thumb, 244 bytes, Stack size 40 bytes, keypadtri_led.o(i.keypad_getkey))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = keypad_getkey
 </UL>
 <BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4

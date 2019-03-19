@@ -146,7 +146,7 @@ char keypad_getkey(void){
 		delayUs(2);																		//Allow signal to settle
 		row = PTC->PDIR & 0xF;									//Read all rows
 		PTC->PCOR = 0xF << 4;													//Set all the column data pins low
-		if (row != 0xF) break;													//If row isn't 0, an input was detected
+		if (row != 0) break;													//If row isn't 0, an input was detected
 	}
 	
 	//Cleanup and exit if no key pressed
