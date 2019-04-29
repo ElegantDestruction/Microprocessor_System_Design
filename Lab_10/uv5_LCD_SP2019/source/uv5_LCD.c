@@ -36,7 +36,20 @@ void LCD_Example(void) {
 int main (void) {
 			
 		//Run example code
-		LCD_Example();
+		//LCD_Example();
+	//Let's try making changes to display content
+	Init_LCD();
+	Clear_LCD();
+	
+	Set_Cursor(0,0);
+	Print_LCD("This is test two");
+	Set_Cursor(0,1);
+	Print_LCD("Number 5");
+	
+	Delay(5000000);
+	
+	Set_Cursor(0,1);
+	Print_LCD("Number 6");
 
 	
 }

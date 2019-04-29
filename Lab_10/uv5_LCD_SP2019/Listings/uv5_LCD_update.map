@@ -8,7 +8,11 @@ Section Cross References
     uv5_lcd.o(i.LCD_Example) refers to lcd_4bit.o(i.Clear_LCD) for Clear_LCD
     uv5_lcd.o(i.LCD_Example) refers to lcd_4bit.o(i.Set_Cursor) for Set_Cursor
     uv5_lcd.o(i.LCD_Example) refers to lcd_4bit.o(i.Print_LCD) for Print_LCD
-    uv5_lcd.o(i.main) refers to uv5_lcd.o(i.LCD_Example) for LCD_Example
+    uv5_lcd.o(i.main) refers to lcd_4bit.o(i.Init_LCD) for Init_LCD
+    uv5_lcd.o(i.main) refers to lcd_4bit.o(i.Clear_LCD) for Clear_LCD
+    uv5_lcd.o(i.main) refers to lcd_4bit.o(i.Set_Cursor) for Set_Cursor
+    uv5_lcd.o(i.main) refers to lcd_4bit.o(i.Print_LCD) for Print_LCD
+    uv5_lcd.o(i.main) refers to uv5_lcd.o(i.Delay) for Delay
     lcd_4bit.o(i.Clear_LCD) refers to lcd_4bit.o(i.lcd_write_cmd) for lcd_write_cmd
     lcd_4bit.o(i.Clear_LCD) refers to lcd_4bit.o(i.Set_Cursor) for Set_Cursor
     lcd_4bit.o(i.Init_LCD) refers to lcd_4bit.o(i.lcd_init_port) for lcd_init_port
@@ -152,6 +156,7 @@ Removing Unused input sections from the image.
 
     Removing uv5_lcd.o(.rev16_text), (4 bytes).
     Removing uv5_lcd.o(.revsh_text), (4 bytes).
+    Removing uv5_lcd.o(i.LCD_Example), (72 bytes).
     Removing lcd_4bit.o(.rev16_text), (4 bytes).
     Removing lcd_4bit.o(.revsh_text), (4 bytes).
     Removing system_mkl25z4.o(.rev16_text), (4 bytes).
@@ -160,7 +165,7 @@ Removing Unused input sections from the image.
     Removing system_mkl25z4.o(.data), (4 bytes).
     Removing system_mkl25z4.o(i.__ARM_common_switch8), (28 bytes).
 
-9 unused section(s) (total 456 bytes) removed from the image.
+10 unused section(s) (total 528 bytes) removed from the image.
 
 ==============================================================================
 
@@ -176,52 +181,52 @@ Image Symbol Table
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0.o ABSOLUTE
     ../clib/angel/scatterp.s                 0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  tempstk.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  tempstk.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv_div0.o ABSOLUTE
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/cfplib/fpinit.c                 0x00000000   Number         0  fpinit.o ABSOLUTE
@@ -288,21 +293,20 @@ Image Symbol Table
     i.Clear_LCD                              0x000001f2   Section        0  lcd_4bit.o(i.Clear_LCD)
     i.Delay                                  0x00000204   Section        0  uv5_lcd.o(i.Delay)
     i.Init_LCD                               0x00000214   Section        0  lcd_4bit.o(i.Init_LCD)
-    i.LCD_Example                            0x00000294   Section        0  uv5_lcd.o(i.LCD_Example)
-    i.Print_LCD                              0x000002dc   Section        0  lcd_4bit.o(i.Print_LCD)
-    i.Set_Cursor                             0x000002f2   Section        0  lcd_4bit.o(i.Set_Cursor)
-    i.SystemInit                             0x0000030c   Section        0  system_mkl25z4.o(i.SystemInit)
-    i.lcd_init_port                          0x00000318   Section        0  lcd_4bit.o(i.lcd_init_port)
-    i.lcd_putchar                            0x0000034c   Section        0  lcd_4bit.o(i.lcd_putchar)
-    i.lcd_read_status                        0x00000358   Section        0  lcd_4bit.o(i.lcd_read_status)
-    lcd_read_status                          0x00000359   Thumb Code   106  lcd_4bit.o(i.lcd_read_status)
-    i.lcd_write_cmd                          0x000003c8   Section        0  lcd_4bit.o(i.lcd_write_cmd)
-    i.main                                   0x000003e8   Section        0  uv5_lcd.o(i.main)
+    i.Print_LCD                              0x00000294   Section        0  lcd_4bit.o(i.Print_LCD)
+    i.Set_Cursor                             0x000002aa   Section        0  lcd_4bit.o(i.Set_Cursor)
+    i.SystemInit                             0x000002c4   Section        0  system_mkl25z4.o(i.SystemInit)
+    i.lcd_init_port                          0x000002d0   Section        0  lcd_4bit.o(i.lcd_init_port)
+    i.lcd_putchar                            0x00000304   Section        0  lcd_4bit.o(i.lcd_putchar)
+    i.lcd_read_status                        0x00000310   Section        0  lcd_4bit.o(i.lcd_read_status)
+    lcd_read_status                          0x00000311   Thumb Code   106  lcd_4bit.o(i.lcd_read_status)
+    i.lcd_write_4bit                         0x00000380   Section        0  lcd_4bit.o(i.lcd_write_4bit)
+    i.lcd_write_cmd                          0x000003c4   Section        0  lcd_4bit.o(i.lcd_write_cmd)
+    i.wait_while_busy                        0x000003e4   Section        0  lcd_4bit.o(i.wait_while_busy)
     .ARM.__at_0x400                          0x00000400   Section       16  startup_mkl25z4.o(.ARM.__at_0x400)
-    i.lcd_write_4bit                         0x00000410   Section        0  lcd_4bit.o(i.lcd_write_4bit)
-    i.lcd_write_data                         0x00000454   Section        0  lcd_4bit.o(i.lcd_write_data)
-    lcd_write_data                           0x00000455   Thumb Code    28  lcd_4bit.o(i.lcd_write_data)
-    i.wait_while_busy                        0x00000474   Section        0  lcd_4bit.o(i.wait_while_busy)
+    i.lcd_write_data                         0x00000410   Section        0  lcd_4bit.o(i.lcd_write_data)
+    lcd_write_data                           0x00000411   Thumb Code    28  lcd_4bit.o(i.lcd_write_data)
+    i.main                                   0x00000430   Section        0  uv5_lcd.o(i.main)
     .bss                                     0x1ffff000   Section       96  libspace.o(.bss)
     HEAP                                     0x1ffff060   Section        0  startup_mkl25z4.o(HEAP)
     STACK                                    0x1ffff060   Section      256  startup_mkl25z4.o(STACK)
@@ -449,18 +453,17 @@ Image Symbol Table
     __semihosting_library_function           0x000001f3   Thumb Code     0  indicate_semi.o(.text)
     Delay                                    0x00000205   Thumb Code    16  uv5_lcd.o(i.Delay)
     Init_LCD                                 0x00000215   Thumb Code   122  lcd_4bit.o(i.Init_LCD)
-    LCD_Example                              0x00000295   Thumb Code    40  uv5_lcd.o(i.LCD_Example)
-    Print_LCD                                0x000002dd   Thumb Code    22  lcd_4bit.o(i.Print_LCD)
-    Set_Cursor                               0x000002f3   Thumb Code    24  lcd_4bit.o(i.Set_Cursor)
-    SystemInit                               0x0000030d   Thumb Code     8  system_mkl25z4.o(i.SystemInit)
-    lcd_init_port                            0x00000319   Thumb Code    38  lcd_4bit.o(i.lcd_init_port)
-    lcd_putchar                              0x0000034d   Thumb Code    12  lcd_4bit.o(i.lcd_putchar)
-    lcd_write_cmd                            0x000003c9   Thumb Code    28  lcd_4bit.o(i.lcd_write_cmd)
-    main                                     0x000003e9   Thumb Code    10  uv5_lcd.o(i.main)
-    lcd_write_4bit                           0x00000411   Thumb Code    62  lcd_4bit.o(i.lcd_write_4bit)
-    wait_while_busy                          0x00000475   Thumb Code    18  lcd_4bit.o(i.wait_while_busy)
-    Region$$Table$$Base                      0x00000488   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000498   Number         0  anon$$obj.o(Region$$Table)
+    Print_LCD                                0x00000295   Thumb Code    22  lcd_4bit.o(i.Print_LCD)
+    Set_Cursor                               0x000002ab   Thumb Code    24  lcd_4bit.o(i.Set_Cursor)
+    SystemInit                               0x000002c5   Thumb Code     8  system_mkl25z4.o(i.SystemInit)
+    lcd_init_port                            0x000002d1   Thumb Code    38  lcd_4bit.o(i.lcd_init_port)
+    lcd_putchar                              0x00000305   Thumb Code    12  lcd_4bit.o(i.lcd_putchar)
+    lcd_write_4bit                           0x00000381   Thumb Code    62  lcd_4bit.o(i.lcd_write_4bit)
+    lcd_write_cmd                            0x000003c5   Thumb Code    28  lcd_4bit.o(i.lcd_write_cmd)
+    wait_while_busy                          0x000003e5   Thumb Code    18  lcd_4bit.o(i.wait_while_busy)
+    main                                     0x00000431   Thumb Code    62  uv5_lcd.o(i.main)
+    Region$$Table$$Base                      0x000004a0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000004b0   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x1ffff000   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x1ffff060   Data           0  libspace.o(.bss)
 
@@ -472,9 +475,9 @@ Memory Map of the image
 
   Image Entry point : 0x000000c1
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00000498, Max: 0x00020000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000004b0, Max: 0x00020000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000498, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000004b0, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -535,26 +538,24 @@ Memory Map of the image
     0x000001f2   0x000001f2   0x00000012   Code   RO           66    i.Clear_LCD         lcd_4bit.o
     0x00000204   0x00000204   0x00000010   Code   RO            3    i.Delay             uv5_lcd.o
     0x00000214   0x00000214   0x00000080   Code   RO           67    i.Init_LCD          lcd_4bit.o
-    0x00000294   0x00000294   0x00000048   Code   RO            4    i.LCD_Example       uv5_lcd.o
-    0x000002dc   0x000002dc   0x00000016   Code   RO           68    i.Print_LCD         lcd_4bit.o
-    0x000002f2   0x000002f2   0x00000018   Code   RO           69    i.Set_Cursor        lcd_4bit.o
-    0x0000030a   0x0000030a   0x00000002   PAD
-    0x0000030c   0x0000030c   0x0000000c   Code   RO          158    i.SystemInit        system_mkl25z4.o
-    0x00000318   0x00000318   0x00000034   Code   RO           70    i.lcd_init_port     lcd_4bit.o
-    0x0000034c   0x0000034c   0x0000000c   Code   RO           71    i.lcd_putchar       lcd_4bit.o
-    0x00000358   0x00000358   0x00000070   Code   RO           72    i.lcd_read_status   lcd_4bit.o
-    0x000003c8   0x000003c8   0x00000020   Code   RO           74    i.lcd_write_cmd     lcd_4bit.o
-    0x000003e8   0x000003e8   0x0000000a   Code   RO            5    i.main              uv5_lcd.o
-    0x000003f2   0x000003f2   0x0000000e   PAD
+    0x00000294   0x00000294   0x00000016   Code   RO           68    i.Print_LCD         lcd_4bit.o
+    0x000002aa   0x000002aa   0x00000018   Code   RO           69    i.Set_Cursor        lcd_4bit.o
+    0x000002c2   0x000002c2   0x00000002   PAD
+    0x000002c4   0x000002c4   0x0000000c   Code   RO          158    i.SystemInit        system_mkl25z4.o
+    0x000002d0   0x000002d0   0x00000034   Code   RO           70    i.lcd_init_port     lcd_4bit.o
+    0x00000304   0x00000304   0x0000000c   Code   RO           71    i.lcd_putchar       lcd_4bit.o
+    0x00000310   0x00000310   0x00000070   Code   RO           72    i.lcd_read_status   lcd_4bit.o
+    0x00000380   0x00000380   0x00000044   Code   RO           73    i.lcd_write_4bit    lcd_4bit.o
+    0x000003c4   0x000003c4   0x00000020   Code   RO           74    i.lcd_write_cmd     lcd_4bit.o
+    0x000003e4   0x000003e4   0x00000012   Code   RO           76    i.wait_while_busy   lcd_4bit.o
+    0x000003f6   0x000003f6   0x0000000a   PAD
     0x00000400   0x00000400   0x00000010   Code   RO          148    .ARM.__at_0x400     startup_mkl25z4.o
-    0x00000410   0x00000410   0x00000044   Code   RO           73    i.lcd_write_4bit    lcd_4bit.o
-    0x00000454   0x00000454   0x00000020   Code   RO           75    i.lcd_write_data    lcd_4bit.o
-    0x00000474   0x00000474   0x00000012   Code   RO           76    i.wait_while_busy   lcd_4bit.o
-    0x00000486   0x00000486   0x00000002   PAD
-    0x00000488   0x00000488   0x00000010   Data   RO          370    Region$$Table       anon$$obj.o
+    0x00000410   0x00000410   0x00000020   Code   RO           75    i.lcd_write_data    lcd_4bit.o
+    0x00000430   0x00000430   0x00000070   Code   RO            5    i.main              uv5_lcd.o
+    0x000004a0   0x000004a0   0x00000010   Data   RO          370    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x1ffff000, Load base: 0x00000498, Size: 0x00000160, Max: 0x00004000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x1ffff000, Load base: 0x000004b0, Size: 0x00000160, Max: 0x00004000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -573,12 +574,12 @@ Image component sizes
        518         40          0          0          0       5601   lcd_4bit.o
         80         44        192          0        256        968   startup_mkl25z4.o
         12          4          0          0          0        485   system_mkl25z4.o
-        98         32          0          0          0       5973   uv5_lcd.o
+       128         50          0          0          0       5527   uv5_lcd.o
 
     ----------------------------------------------------------------------
-       726        120        208          0        256      13027   Object Totals
+       750        138        208          0        256      12581   Object Totals
          0          0         16          0          0          0   (incl. Generated)
-        18          0          0          0          0          0   (incl. Padding)
+        12          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -624,15 +625,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       968        136        208          0        352      12843   Grand Totals
-       968        136        208          0        352      12843   ELF Image Totals
-       968        136        208          0          0          0   ROM Totals
+       992        154        208          0        352      12441   Grand Totals
+       992        154        208          0        352      12441   ELF Image Totals
+       992        154        208          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1176 (   1.15kB)
+    Total RO  Size (Code + RO Data)                 1200 (   1.17kB)
     Total RW  Size (RW Data + ZI Data)               352 (   0.34kB)
-    Total ROM Size (Code + RO Data + RW Data)       1176 (   1.15kB)
+    Total ROM Size (Code + RO Data + RW Data)       1200 (   1.17kB)
 
 ==============================================================================
 
